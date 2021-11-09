@@ -6,10 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import pandas as pd
 import urllib.parse
-def notify():
-    wave_obj = simpleaudio.WaveObject.from_wave_file("bell.wav")
-    play_obj = wave_obj.play()
-    play_obj.wait_done()
+
 driver = uc.Chrome()
 driver.set_page_load_timeout(20)
 def dict_csv_read():
