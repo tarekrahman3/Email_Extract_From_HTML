@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 
 def dict_csv_read():
-    return pd.read_csv('domains.csv').domains.tolist()
+    return pd.read_csv('import.csv').to_dict('records')
 
 def scrape(url, index, dict_array):
     if index%50==0:
@@ -32,16 +32,28 @@ def scrape(url, index, dict_array):
     print(f"{index} | {data}")
     dict_array.append(data)
 
-driver = uc.Chrome()
-driver.set_page_load_timeout(20)
-urls = dict_csv_read()
-dict_array = []
-try:
-    for index, url in enumerate(urls):
-            time.sleep(1)
-            scrape(url, index, dict_array)
-except Exception as e:
-    print(e)
-finally:
-    pd.DataFrame(dict_array).to_csv('export.csv', index = False)
-    driver.quit()
+def for_single_address():
+    dict_array = []
+    try:
+        for index, url in enumerate(import_):
+                time.sleep(1)
+                scrape(url, index, dict_array)
+    except Exception as e:
+        print(e)
+    finally:
+        pd.DataFrame(dict_array).to_csv('export_type_single.csv', index = False)
+
+
+def for_google_search_result():
+    dict_array = []
+    for each_dict in import_:
+        print(list(each_dict.keys())[0])
+
+if __name__ == '__main__':
+    #driver = uc.Chrome()
+    #driver.set_page_load_timeout(20)
+    import_ = dict_csv_read()
+    print(import_)
+    #for_single_address()
+    for_google_search_result()
+    #driver.quit()
