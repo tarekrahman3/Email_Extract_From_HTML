@@ -11,6 +11,7 @@ async function initiate_browser () {
   const page = await browser.newPage();
   return page
 };
+
 async function scrap_emails(page, url) {
   page.setViewport({ width: 1920, height: 1080 });
   page.goto(url)
