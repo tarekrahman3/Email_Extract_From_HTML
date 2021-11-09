@@ -36,8 +36,8 @@ def for_single_address():
     dict_array = []
     try:
         for index, url in enumerate(import_):
-                time.sleep(1)
-                scrape(url, index, dict_array)
+            time.sleep(1)
+            scrape(url, index, dict_array)
     except Exception as e:
         print(e)
     finally:
@@ -46,14 +46,21 @@ def for_single_address():
 
 def for_google_search_result():
     dict_array = []
-    for each_dict in import_:
-        print(list(each_dict.keys())[0])
+    try:
+        for index, each_dict in enumerate(import_):
+            first_search_result_url = list(each_dict.values())[3]
+            if str(first_search_result_url) != 'nan':
+                scrape(first_search_result_url, index, dict_array)
+    except Exception as e:
+        print(e)
+    finally:
+        pd.DataFrame(dict_array).to_csv('export_type_google_search.csv', index = False)
 
 if __name__ == '__main__':
-    #driver = uc.Chrome()
-    #driver.set_page_load_timeout(20)
+    driver = uc.Chrome()
+    driver.set_page_load_timeout(20)
     import_ = dict_csv_read()
-    print(import_)
+    print(len(import_))
     #for_single_address()
     for_google_search_result()
-    #driver.quit()
+    driver.quit()
