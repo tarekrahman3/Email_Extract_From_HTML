@@ -1,7 +1,6 @@
 import undetected_chromedriver.v2 as uc
 import time
 import re
-import simpleaudio
 from selenium.webdriver.common.by import By
 import pandas as pd
 
@@ -16,8 +15,9 @@ def scrape(url, index, dict_array):
         emails_search = driver.execute_script(r'return Array.from(new Set(Array.from(String(document.body.innerText).matchAll(/\b[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b/g)).map((e)=>e.toString().trim().toLowerCase())))')
         emails = []
         emails_search = list(set([re.sub(r'^www\.|^undefined|^email|\.$','',i) for i in emails_search]))
-        for i in emails_search:
-            emails.append(i)
+        [emails.append(i) for i in emails_search]
+        e = driver.execute_script(r' return Array.from(new Set(Array.from(String(document.documentElement.outerHTML).matchAll(/\b[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b/g)).map((e)=>e.toString().trim().toLowerCase())))')
+        [emails.append(i) for i in e]
     except:
         emails = None
     try:
@@ -26,7 +26,7 @@ def scrape(url, index, dict_array):
         phone_number = None
     data = {
         'source':url,
-        'domain_emails':emails,
+        'domain_emails':list(set(emails)),
         'phone_number':phone_number
         }
     print(f"{index} | {data}")
