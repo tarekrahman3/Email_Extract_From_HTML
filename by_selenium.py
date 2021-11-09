@@ -18,6 +18,7 @@ def scrape(url, index, dict_array):
         [emails.append(i) for i in emails_search]
         e = driver.execute_script(r' return Array.from(new Set(Array.from(String(document.documentElement.outerHTML).matchAll(/\b[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b/g)).map((e)=>e.toString().trim().toLowerCase())))')
         [emails.append(i) for i in e]
+        emails = list(set(emails))
     except:
         emails = None
     try:
@@ -26,7 +27,7 @@ def scrape(url, index, dict_array):
         phone_number = None
     data = {
         'source':url,
-        'domain_emails':list(set(emails)),
+        'domain_emails':emails,
         'phone_number':phone_number
         }
     print(f"{index} | {data}")
