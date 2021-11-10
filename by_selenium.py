@@ -19,15 +19,20 @@ def scrape(url, index, dict_array):
         e = driver.execute_script(r' return Array.from(new Set(Array.from(String(document.documentElement.outerHTML).matchAll(/\b[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b/g)).map((e)=>e.toString().trim().toLowerCase())))')
         [emails.append(i) for i in e]
         emails = list(set(emails))
+        final_emails = []
+        for ex in emails:
+            if str(type(re.search(r'jpg$|jpeg$|png$|svg$|\.js$|\.css$', ex)))!="<class 're.Match'>":
+                final_emails.append(ex)
+
     except:
-        emails = None
+        final_emails = None
     try:
         phone_number = list(set([re.sub(r'\(|\)','',i) for i in driver.execute_script(r"return Array.from(new Set(Array.from(String(document.body.innerText).matchAll(/\(02\) \d{4} \d{4}|02 \d{4} \d{4}/g)).map((e)=>e.toString().trim())))")]))
     except:
         phone_number = None
     data = {
         'source':url,
-        'domain_emails':emails,
+        'domain_emails':final_emails,
         'phone_number':phone_number
         }
     print(f"{index} | {data}")
