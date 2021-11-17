@@ -1,4 +1,4 @@
-# Scrapy settings for Email_Scraper_Spyder project
+# Scrapy settings for Email_Scraper_Spider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'Email_Scraper_Spyder'
+BOT_NAME = 'Email_Scraper_Spider'
 
-SPIDER_MODULES = ['Email_Scraper_Spyder.spiders']
-NEWSPIDER_MODULE = 'Email_Scraper_Spyder.spiders'
+SPIDER_MODULES = ['Email_Scraper_Spider.spiders']
+NEWSPIDER_MODULE = 'Email_Scraper_Spider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'Email_Scraper_Spyder.middlewares.EmailScraperSpyderSpiderMiddleware': 543,
+#    'Email_Scraper_Spider.middlewares.EmailScraperSpyderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'Email_Scraper_Spyder.middlewares.EmailScraperSpyderDownloaderMiddleware': 543,
+#    'Email_Scraper_Spider.middlewares.EmailScraperSpyderDownloaderMiddleware': 543,
 #}
 DOWNLOADER_MIDDLEWARES = {  
        'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
@@ -67,7 +67,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'Email_Scraper_Spyder.pipelines.EmailScraperSpyderPipeline': 300,
+#    'Email_Scraper_Spider.pipelines.EmailScraperSpyderPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
